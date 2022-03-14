@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form đăng ký</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2 align="center">ĐĂNG KÝ TÀI KHOẢN</h2>
+    <form name="form1" onSubmit="SubmitForm();" method="post" action="#">
+        <div>
+            <label for="txtDN" class="title">Tên đăng nhập:</label>
+            <input type="txtDN" onblur="return KiemTraTenDN();" type="text" name="txtdn" size="30" placeholder="txtDN" /><span id="tendn">*</span>
+        </div>
+        <div>
+            <label for="txtMK" class="title">Mật khẩu:</label>
+            <input type="txtMK" onblur="return KiemTraPassWord();" type="password" name="txtMk" size="30" placeholder="txtMK" /><span id="mk">.*.</span>
+        </div>
+        <div>
+            <label for="txtXNMK" class="title">Nhập lại mật khẩu:</label>
+            <input type="txtXNMK" onblur="return KiemTraXacNhanPassword();" type="password" name="txtXNMK" size="30" placeholder="txtXNMK" /><span id="xnmk">*</span>
+        </div>
+        <h5 align="center">THÔNG TIN CÁ NHÂN</h5>   
+        <div>
+            <label for="txtName" class="title">Họ và tên:</label>
+            <input type="text" id="txtName" name="txtName" size="30" placeholder="txtName" /><span id="hoten">* bắt buộc</span>
+        </div>
+        <div>
+            <label for="txtNS" class="title">Ngày sinh:</label>
+            <input type="date" id="txtNS" name="txtNS" size="30" placeholder="txtNS" onBlur="return KiemTraNgaySinh();"/><span id="ngaysinh">...</span>
+        </div>
+        <div class="radio-buttons">
+            <span class="title">Giới tính:</span>
+            <input type="radio" name="gender" id="male" value="M" checked/>
+            <label for="male">Nam</label>
+            <input type="radio" name="gender" id="female" value="F"/>
+            <label for="female">Nữ</label><br />
+        </div>
+        <div>
+            <label for="txtDC" class="title">Địa chỉ:</label>
+            <input type="text" id="txtDC" name="txtDC" size="30" placeholder="txtDC"/><span id="diachi">.</span>
+        </div>
+        <div>
+            <label for="txtDT" class="title">Điện thoại:</label>
+            <input type="text" id="txtDT" name="txtDT" size="30" placeholder="txtDT"/><span id="dienthoai">phải là số</span>
+        </div>
+        <div>
+            <label for="txtEmail" class="title">Email:</label>
+            <input type="email" id="txtEmail" name="txtEmail" size="30" placeholder="txtEmail"/><span id="email">nhập đúng địa chỉ email</span>
+        </div>
+        <div class="submit">
+            <input type="submit" value="Đăng ký" id="submit"/>
+            <input type="reset" value="Hủy" id="submit" />
+        </div>
+        <script>
+            function KiemTraNgaySinh(){
+                var ns = new Date(document.getElementById('txtNS').value);
+                var today = new Date();
+                if (eval(today.getFullYear() - ns.getFullYear()) <=10){
+                    ngaysinh.innerText = "tuổi phải >10";
+                    return false;
+                }else{
+                    ngaysinh.innerText = "";
+                    return true;
+                }
+            }
+            function SubmitForm(){
+                if(KiemTraTenDN() ==false || KiemTraPassWord() ==false || KiemTraXacNhanPassword()==false){
+                    alert("Bạn chưa nhập đầy đủ và đúng thông tin!");
+                }else{
+                    var tt1 = document.getElementById("txtName").value;
+                    var tt2 = document.getElementById("txtNS").value;
+                    var w = open("FormValidation_info.html","Ketqua");
+                    w.document.write("<B>THONG TIN CA NHAN</b>");
+                    w.document.write("ho ten:" + tt1 + "<br>");
+                    w.document.write("Nam sinh:" + tt2 + "<br>");
+                }
+            }
+        </script>
+</body>
+</html>
